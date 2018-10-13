@@ -1,11 +1,36 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+$colors: (
+  bkg: #f7f7ff,
+  primary: #b14aed,
+  button: #3f826d,
+  text: #545e75
+);
+
+$desktop: 840px;
+
+@function getColor($color) {
+  @return map-get($colors, $color);
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+
+
+
+
+
 html,
 body,
 .App {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   height: 95vh;
   margin: 0;
-  background-color: #f7f7ff;
+  background-color: getColor(bkg);
 }
 
 .App {
@@ -15,20 +40,30 @@ body,
   align-items: center;
 }
 
+
+
+
+
 header {
   width: 100%;
   box-sizing: border-box;
   padding: 20px;
-  color: #b14aed;
+  color: getColor(primary);
   font-weight: bolder;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  img {
+    margin-left: 10px;
+    height: 50px;
+  }
+
 }
-header img {
-  margin-left: 10px;
-  height: 50px;
-}
+
+
+
+
 
 main {
   width: 100%;
@@ -38,30 +73,35 @@ main {
   align-items: center;
 }
 
-@media (min-width: 840px) {
-  #home {
+#home {
+  @include desktop {
     width: fit-content;
     align-items: flex-start;
   }
 }
 
 #home h1, #result h3 {
-  text-transform: uppercase;
-  color: #b14aed;
-  margin: 0;
-  margin-bottom: 10px;
-  text-align: center;
+    text-transform: uppercase;
+    color: getColor(primary);
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
-#result h3 {
-  width: 80%;
-  margin-bottom: 20px;
+#result {
+  h3 {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+  img {
+    height: 250px;
+    margin-bottom: 10px;
+    border: 3px dotted getColor(primary);
+  }
 }
-#result img {
-  height: 250px;
-  margin-bottom: 10px;
-  border: 3px dotted #b14aed;
-}
+
+
+
 
 footer {
   display: flex;
@@ -69,57 +109,61 @@ footer {
   justify-content: center;
   align-items: center;
   width: 100%;
-}
-@media (min-width: 840px) {
-  footer {
+
+  @include desktop {
     flex-direction: row;
     justify-content: space-between;
     padding: 0 20px;
     box-sizing: border-box;
   }
-}
-footer span {
-  order: 1;
-  color: #545e75;
-  font-weight: bolder;
-  margin-top: 15px;
-}
-footer address {
+
+  span {
+    order: 1;
+    color: getColor(text);
+    font-weight: bolder;
+    margin-top: 15px;
+  }
+
+  address {
   display: flex;
   justify-content: space-between;
   width: 150px;
+  @include desktop { order: 2; }
+
+  
+    img {
+      height: 2rem;
+    }
+  } 
 }
-@media (min-width: 840px) {
-  footer address {
-    order: 2;
-  }
-}
-footer address img {
-  height: 2rem;
-}
+
+
+
+
 
 button {
   text-transform: uppercase;
   color: white;
-  background-color: #3f826d;
+  background-color: getColor(button);
   border: 0;
   border-radius: 5px;
   font-size: 1.2rem;
   padding: 1rem 1.8rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   width: fit-content;
   font-weight: bolder;
   cursor: pointer;
 }
+
+
+
 
 .carregandoArea {
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: #f7f7ff;
+  background-color: getColor(bkg);
   justify-content: center;
   align-items: center;
 }
-
-/*# sourceMappingURL=App.css.map */
